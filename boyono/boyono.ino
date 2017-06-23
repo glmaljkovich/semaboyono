@@ -1,21 +1,22 @@
+
 #include <Adafruit_NeoPixel.h>
 #include "led.h"
 
 
-#define DELAY_MAX 300
-#define BUZZ 12
-#define BUT_CHANGE 3
-#define BUT_L3 5
-#define BUT_L2 4
-#define BUT_L1 2
+int maxDelay = 300;
+int potentiometer = 12;
+int selectorButton = 3;
+int button1 = 2;
+int button2 = 4;
+int button3 = 5; 
 
 void setup() {                
   // initialize shift register PINS
-  pinMode(BUZZ, OUTPUT);
-  pinMode(BUT_L3, INPUT);
-  pinMode(BUT_L2, INPUT);
-  pinMode(BUT_L1, INPUT);  
-  pinMode(BUT_CHANGE, INPUT);
+  pinMode(potentiometer, OUTPUT);
+  pinMode(button3, INPUT);
+  pinMode(button2, INPUT);
+  pinMode(button1, INPUT);  
+  pinMode(selectorButton, INPUT);
   attachInterrupt(1, button_attention, RISING);  
   init_leds();
   Serial.begin(115200);
@@ -32,7 +33,7 @@ void button_attention() {
       while(TCNT0!=254);
       while(TCNT0!=253);      
   }
-  while ((digitalRead(BUT_CHANGE))==HIGH);
+  while ((digitalRead(selectorButton))==HIGH);
   while(TCNT0!=250);
   while(TCNT0!=249);  
   while(TCNT0!=248);    
