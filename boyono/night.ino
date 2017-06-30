@@ -1,8 +1,8 @@
 
 void nightlight(void){
-   set_color_lump(0, AMARILLO);
-   set_color_lump(1, AMARILLO);
-   set_color_lump(2, AMARILLO);
+   set_color_lamp(0, AMARILLO);
+   set_color_lamp(1, AMARILLO);
+   set_color_lamp(2, AMARILLO);
 }
 
 #define LIGHT_DELAY 50
@@ -31,9 +31,9 @@ void inc_percen(unsigned * per, unsigned * del, unsigned char * col_n)
 
 void nightlight_efect (void) {
   delay(LIGHT_DELAY);
-  set_color_lump_aten(0, color_n[0], percent[0]);
-  set_color_lump_aten(1, color_n[1], percent[1]);
-  set_color_lump_aten(2, color_n[2], percent[2]);
+  set_color_lamp_aten(0, color_n[0], percent[0]);
+  set_color_lamp_aten(1, color_n[1], percent[1]);
+  set_color_lamp_aten(2, color_n[2], percent[2]);
   inc_percen(percent,delta, color_n);
 }  
   

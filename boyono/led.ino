@@ -8,7 +8,7 @@ const unsigned char colors[8][3]={{255, 0, 0},
                                          {0, 200, 255},
                                          {255, 45, 0},
                                          {255, 255, 240}};
-                                         
+
 Adafruit_NeoPixel strip[3] = {Adafruit_NeoPixel(7, PIN_L1, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(7, PIN_L2, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(7, PIN_L3, NEO_GRB + NEO_KHZ800)};
 void init_leds(void)
 {
@@ -37,7 +37,7 @@ unsigned char aten_calc (unsigned char value, unsigned at){
 
 void update_led_aten(unsigned char l,unsigned char r, unsigned char g, unsigned char b, unsigned char n, unsigned aten)
 {
- strip[l].setPixelColor(n,aten_calc(r,aten), aten_calc(b,aten), aten_calc(g,aten));  
+ strip[l].setPixelColor(n,aten_calc(r,aten), aten_calc(b,aten), aten_calc(g,aten));
 }
 
 void update_leds_aten(unsigned char l,unsigned char r, unsigned char g, unsigned char b, unsigned aten)
@@ -55,98 +55,98 @@ void update_leds(unsigned char l,unsigned char r, unsigned char g, unsigned char
  unsigned aten;
  aten = (analogRead(BRILLO_PIN));
  if (aten < 100)
-    aten=0; 
+    aten=0;
  if (aten > 924)
-    aten=1024;     
+    aten=1024;
  update_leds_aten(l,r,g,b,aten);
-}     
+}
 
 void update_led(unsigned char l,unsigned char r, unsigned char g, unsigned char b, unsigned char n)
 {
  unsigned aten;
- aten = (analogRead(BRILLO_PIN)); 
+ aten = (analogRead(BRILLO_PIN));
  if (aten < 100)
     aten=0;
  if (aten > 924)
-    aten=1024;         
+    aten=1024;
  strip[l].clear();
  update_led_aten(l,r,g,b,n,aten);
  strip[l].show();
-}  
+}
 
 void update_led_not_show(unsigned char l,unsigned char r, unsigned char g, unsigned char b, unsigned char n)
 {
  unsigned aten;
- aten = (analogRead(BRILLO_PIN)); 
+ aten = (analogRead(BRILLO_PIN));
  update_led_aten(l,r,g,b,n,aten);
-}  
+}
 
 void clear_leds(unsigned char l){
    strip[l].clear();
    strip[l].show();
 }
 
-void set_color_lump (unsigned char lump, unsigned char color) {
+void set_color_lamp (unsigned char lamp, unsigned char color) {
     unsigned char col[3];
     color_init(&col[0],(unsigned char *)&colors[color][0]);
-    update_leds(lump,col[0],col[1],col[2]);
+    update_leds(lamp,col[0],col[1],col[2]);
 }
 
-void set_color_lump_aten (unsigned char lump, unsigned char color, unsigned aten) {
+void set_color_lamp_aten (unsigned char lamp, unsigned char color, unsigned aten) {
     unsigned char col[3];
     color_init(&col[0],(unsigned char *)&colors[color][0]);
-    update_leds_aten(lump,col[0],col[1],col[2], aten);
+    update_leds_aten(lamp,col[0],col[1],col[2], aten);
 }
 
-void show_crux_lump (unsigned char lump, unsigned char color) {
+void show_crux_lamp (unsigned char lamp, unsigned char color) {
     unsigned char col[3];
     color_init(&col[0],(unsigned char *)&colors[color][0]);
-    update_led_not_show(lump,col[0],col[1],col[2],0);
-    update_led_not_show(lump,col[0],col[1],col[2],1);
-    update_led_not_show(lump,col[0],col[1],col[2],3);
-    update_led_not_show(lump,col[0],col[1],col[2],4);
-    update_led_not_show(lump,col[0],col[1],col[2],6);    
-    strip[lump].show();           
-}    
+    update_led_not_show(lamp,col[0],col[1],col[2],0);
+    update_led_not_show(lamp,col[0],col[1],col[2],1);
+    update_led_not_show(lamp,col[0],col[1],col[2],3);
+    update_led_not_show(lamp,col[0],col[1],col[2],4);
+    update_led_not_show(lamp,col[0],col[1],col[2],6);
+    strip[lamp].show();
+}
 
-void show_tilde_lump (unsigned char lump, unsigned char color) {
+void show_tilde_lamp (unsigned char lamp, unsigned char color) {
     unsigned char col[3];
     color_init(&col[0],(unsigned char *)&colors[color][0]);
-    update_led_not_show(lump,col[0],col[1],col[2],1);
-    if (lump!=0)
-       update_led_not_show(lump,col[0],col[1],col[2],3);
+    update_led_not_show(lamp,col[0],col[1],col[2],1);
+    if (lamp!=0)
+       update_led_not_show(lamp,col[0],col[1],col[2],3);
     else
-       update_led_not_show(lump,col[0],col[1],col[2],0);    
-    update_led_not_show(lump,col[0],col[1],col[2],4);
-    update_led_not_show(lump,col[0],col[1],col[2],6);
-    strip[lump].show();       
-}    
+       update_led_not_show(lamp,col[0],col[1],col[2],0);
+    update_led_not_show(lamp,col[0],col[1],col[2],4);
+    update_led_not_show(lamp,col[0],col[1],col[2],6);
+    strip[lamp].show();
+}
 
-void show_fire_lump (unsigned char lump, unsigned char color) {
+void show_fire_lamp (unsigned char lamp, unsigned char color) {
     unsigned char col[3];
     color_init(&col[0],(unsigned char *)&colors[color][0]);
-    update_led(lump,col[0],col[1],col[2],6);
+    update_led(lamp,col[0],col[1],col[2],6);
     delay(200);
-    clear_leds(lump);
+    clear_leds(lamp);
     col[0]=col[0]>>2;
     col[1]=col[1]>>2;
-    col[2]=col[2]>>2;    
-    update_led_not_show(lump,col[0],col[1],col[2],0);
-    update_led_not_show(lump,col[0],col[1],col[2],1);
-    update_led_not_show(lump,col[0],col[1],col[2],2);
-    update_led_not_show(lump,col[0],col[1],col[2],3);    
-    update_led_not_show(lump,col[0],col[1],col[2],4);
-    update_led_not_show(lump,col[0],col[1],col[2],5);    
-    strip[lump].show();    
+    col[2]=col[2]>>2;
+    update_led_not_show(lamp,col[0],col[1],col[2],0);
+    update_led_not_show(lamp,col[0],col[1],col[2],1);
+    update_led_not_show(lamp,col[0],col[1],col[2],2);
+    update_led_not_show(lamp,col[0],col[1],col[2],3);
+    update_led_not_show(lamp,col[0],col[1],col[2],4);
+    update_led_not_show(lamp,col[0],col[1],col[2],5);
+    strip[lamp].show();
     delay(100);
     col[0]=col[0]>>2;
     col[1]=col[1]>>2;
-    col[2]=col[2]>>2;    
-    update_led_not_show(lump,col[0],col[1],col[2],0);
-    update_led_not_show(lump,col[0],col[1],col[2],1);
-    update_led_not_show(lump,col[0],col[1],col[2],2);
-    update_led_not_show(lump,col[0],col[1],col[2],3);    
-    update_led_not_show(lump,col[0],col[1],col[2],4);
-    update_led_not_show(lump,col[0],col[1],col[2],5);        
-    strip[lump].show();        
-}    
+    col[2]=col[2]>>2;
+    update_led_not_show(lamp,col[0],col[1],col[2],0);
+    update_led_not_show(lamp,col[0],col[1],col[2],1);
+    update_led_not_show(lamp,col[0],col[1],col[2],2);
+    update_led_not_show(lamp,col[0],col[1],col[2],3);
+    update_led_not_show(lamp,col[0],col[1],col[2],4);
+    update_led_not_show(lamp,col[0],col[1],col[2],5);
+    strip[lamp].show();
+}

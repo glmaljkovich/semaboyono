@@ -2,25 +2,29 @@
 #include <Adafruit_NeoPixel.h>
 #include "led.h"
 
+#define RED_BUTTON 5
+//Prende el led Amarillo
+#define BLUE_BUTTON 4
+#define GREEN_BUTTON 2
+#define BUZZER 11
 
 int maxDelay = 300;
 int potentiometer = 12;
 int selectorButton = 3;
-int button1 = 2;
-int button2 = 4;
-int button3 = 5; 
 
-void setup() {                
+
+void setup() {
   // initialize shift register PINS
   pinMode(potentiometer, OUTPUT);
-  pinMode(button3, INPUT);
-  pinMode(button2, INPUT);
-  pinMode(button1, INPUT);  
+  pinMode(RED_BUTTON, INPUT);
+  pinMode(BLUE_BUTTON, INPUT);
+  pinMode(GREEN_BUTTON, INPUT);
   pinMode(selectorButton, INPUT);
-  attachInterrupt(1, button_attention, RISING);  
+  pinMode(BUZZER, OUTPUT);
+  attachInterrupt(1, button_attention, RISING);
   init_leds();
   Serial.begin(115200);
-  randomSeed(analogRead(A0)*analogRead(A1)); 
+  randomSeed(analogRead(A0)*analogRead(A1));
 }
 
 unsigned char game_i=0;
@@ -31,17 +35,17 @@ void button_attention() {
   while(TCNT0!=0);
   do {
       while(TCNT0!=254);
-      while(TCNT0!=253);      
+      while(TCNT0!=253);
   }
   while ((digitalRead(selectorButton))==HIGH);
   while(TCNT0!=250);
-  while(TCNT0!=249);  
-  while(TCNT0!=248);    
+  while(TCNT0!=249);
+  while(TCNT0!=248);
   game_i++;
 }
 
 //================================================================================
-// The Main LOOP                                                                  
+// The Main LOOP
 //================================================================================
 void loop() {           // R, B, G
   while(1){
@@ -63,15 +67,15 @@ void loop() {           // R, B, G
         break;
         case LUZ_NOCHE:
             nightlight();
-        break;  
+        break;
         case EFECTO_LUZ_NOCHE:
             nightlight_efect();
         break;
         case OFF:
             clear_leds(0);
-            clear_leds(1);            
-            clear_leds(2);            
-        break;        
+            clear_leds(1);
+            clear_leds(2);
+        break;
      }
   }
 }

@@ -17,14 +17,14 @@ void semaforo_lights (void) {
     case ROJO:
         clear_leds(YEL_LIGHT);
         clear_leds(GRN_LIGHT);
-        set_color_lump(RED_LIGHT, ROJO);
+        set_color_lamp(RED_LIGHT, ROJO);
         if (internal_count>=80) {
             semaforo_stat++;
             internal_count=0;
         }
      break;
      case AMARILLO1:   
-        set_color_lump(YEL_LIGHT, AMARILLO);
+        set_color_lamp(YEL_LIGHT, AMARILLO);
         if (internal_count>=30) {
             semaforo_stat++;
             internal_count=0;
@@ -33,7 +33,7 @@ void semaforo_lights (void) {
      case VERDE:   
         clear_leds(RED_LIGHT);
         clear_leds(YEL_LIGHT);
-        set_color_lump(GRN_LIGHT, VERDE);
+        set_color_lamp(GRN_LIGHT, VERDE);
         if (internal_count>=100) {
             semaforo_stat++;
             internal_count=0;
@@ -41,7 +41,7 @@ void semaforo_lights (void) {
      break;
      default:   
         clear_leds(GRN_LIGHT);
-        set_color_lump(YEL_LIGHT, AMARILLO);
+        set_color_lamp(YEL_LIGHT, AMARILLO);
         if (internal_count>=30) {
             semaforo_stat=0;
             internal_count=0;
@@ -59,7 +59,7 @@ void semaforo_nightlight(void){
     case AMARILLO_ON:
         clear_leds(RED_LIGHT);
         clear_leds(GRN_LIGHT);
-        set_color_lump(YEL_LIGHT, AMARILLO);
+        set_color_lamp(YEL_LIGHT, AMARILLO);
         if (internal_count>=15) {
             semaforo_stat++;
             internal_count=0;
