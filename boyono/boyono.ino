@@ -65,9 +65,6 @@ void loop() {           // R, B, G
         case SIMON_GAME:
             simon_run();
         break;
-        case LUZ_NOCHE:
-            nightlight();
-        break;
         case EFECTO_LUZ_NOCHE:
             nightlight_efect();
         break;

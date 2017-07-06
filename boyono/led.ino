@@ -109,6 +109,14 @@ void show_crux_lamp (unsigned char lamp, unsigned char color) {
     strip[lamp].show();
 }
 
+void show_dot_lamp (unsigned char lamp, unsigned char color){
+    unsigned char col[3];
+    color_init(&col[0],(unsigned char *)&colors[color][0]);
+    update_led_not_show(lamp,col[0],col[1],col[2],6);
+    strip[lamp].show();
+}
+
+
 void show_tilde_lamp (unsigned char lamp, unsigned char color) {
     unsigned char col[3];
     color_init(&col[0],(unsigned char *)&colors[color][0]);

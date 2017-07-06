@@ -1,8 +1,4 @@
 #define UPD_TIME 50
-#define ROJO 0
-#define AMARILLO1 1
-#define VERDE 2
-#define AMARILLO2 3
 #define RED_LIGHT 2
 #define YEL_LIGHT 1
 #define GRN_LIGHT 0
@@ -23,7 +19,7 @@ void semaforo_lights (void) {
             internal_count=0;
         }
      break;
-     case AMARILLO1:   
+     case AMARILLO:   
         set_color_lamp(YEL_LIGHT, AMARILLO);
         if (internal_count>=30) {
             semaforo_stat++;
