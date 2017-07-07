@@ -124,7 +124,7 @@ void show_three_dots(void) {
 
 void show_win(void) {
    unsigned char i;
-   for (i=0;i<SIZE_SIMON;i++){
+   for (i=0;i<10;i++){
       clear_leds(0);
       clear_leds(1);
       clear_leds(2);
