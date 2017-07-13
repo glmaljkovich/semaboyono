@@ -9,6 +9,25 @@ unsigned char speed_l;
 unsigned char sequence[SIZE_SIMON];
 unsigned char index_seq;
 
+// Declaramos algunas variables para los efectos musicales
+int length = 15;                  // Numero de notas de la melodia
+char notes[] = "ccggaagffeeddc "; // Notas de la melodia (cada letra es una nota distinta)
+int beats[] = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 4 };  // Duracion de cada tono en un array
+int tempo = 100;  //Tempo de la melodia
+int wait = 500; 
+int simonTones[] = {292,523,880};
+
+
+// Funcion para definir las notas segun la duración y el tono
+void playtone(int tone, int duration) {
+  for (long i = 0; i < duration * 1000L; i += tone *2) {
+    digitalWrite(BUZZER, HIGH);
+    delayMicroseconds(tone);
+    digitalWrite(BUZZER, LOW);
+    delayMicroseconds(tone);
+  }
+}
+
 void setup_simon() {
    int i;
    for (i=0; i<SIZE_SIMON;i++)
@@ -36,7 +55,7 @@ void show_lamp_simon(unsigned char index)
  clear_leds(2);
  delay(200);
  set_color_lamp(index, color_lamp(index));
- delay(1000/((20/10)+1));
+ playtone(simonTones[index],wait); 
  clear_leds(0);
  clear_leds(1);
  clear_leds(2);
@@ -54,20 +73,14 @@ unsigned char read_user_seq(void) {
      if (game_i!=game_ilast)
         return 3;
      if (digitalRead(GREEN_BUTTON)== HIGH){
-//       playNote('c', 120);
-//       tone(8, NOTE_C8, 1000/4);
        return 0;
      }
 
      if (digitalRead(BLUE_BUTTON)== HIGH){
-//       playNote('f', 120);
-//       tone(8, NOTE_E7, 1000/4);
        return 1;
      }
 
      if (digitalRead(RED_BUTTON)== HIGH){
-//       playNote('C', 120);
-//       tone(8, NOTE_G6, 1000/4);
        return 2;
      }
   }
@@ -83,7 +96,8 @@ void show_error(void) {
       show_crux_lamp(0, ROJO);
       show_crux_lamp(1, ROJO);
       show_crux_lamp(2, ROJO);
-      delay(450);
+      playtone(659,wait);
+      delay(200);
 // sound
    }
 }

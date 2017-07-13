@@ -36,10 +36,12 @@ void button_attention() {
   do {
       while(TCNT0!=254);
       while(TCNT0!=253);
+      
   }
   while ((digitalRead(selectorButton))==HIGH);
   while(TCNT0!=250);
   while(TCNT0!=249);
+  while(TCNT0!=248);
   while(TCNT0!=248);
   game_i++;
 }
